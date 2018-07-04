@@ -14,6 +14,7 @@ exports.all = function (req,res) {
             console.log(err);
             return res.sendStatus(500);
         }
+        console.log('main route')
         res.send(docs);
     });
     //--------------------------------------------------------------------
