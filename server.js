@@ -41,7 +41,7 @@ db.connect( config.databaseHost, function (err) {
         console.log(err);
     }
 
-    const port = 3005;
+    const port = 8000;
     app.listen(port, function() {
         console.log('API app started. Port :', port);
         console.log(Date());
