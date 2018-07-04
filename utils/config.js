@@ -1,7 +1,7 @@
 'use strict'
 
 exports.config = {
-    serverHost: 'http://localhost:3005/',
+    serverHost: 'https://lovely-hawaii-volcanoes-56940.herokuapp.com/',
     databaseHost: 'mongodb://urlreader:123456url@ds018708.mlab.com:18708/urllist',
     databaseName: 'urllist'
 };
