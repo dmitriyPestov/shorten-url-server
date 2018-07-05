@@ -4,12 +4,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+const cron = require('node-cron');
 const db = require('./db/db');
 const urlsController = require('./controllers/urls');
-const cron = require('node-cron');
 const utilsDB = require('./controllers/utilsDB');
-const mongoose = require('mongoose');
-const path = require('path');
 const {config} = require('./utils/config');
 
 const app = express();
@@ -41,8 +39,7 @@ db.connect( config.databaseHost, function (err) {
         console.log(err);
     }
 
-    const port = 8000;
-    app.listen(process.env.PORT || port, function() {
+    app.listen(process.env.PORT || config.port, function() {
         console.log('API app started. Port :', port);
         console.log(Date());
     });

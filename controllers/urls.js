@@ -1,12 +1,11 @@
 'use strict'
-const Urls = require('../modeles/urls');
-const UrlApi = require('url');
-const db = require('../db/db');
 const moment = require('moment');
 const ObjectID = require('mongodb').ObjectID;
+const UrlApi = require('url');
+const Urls = require('../modeles/urls');
+const db = require('../db/db');
 const {config} = require('../utils/config');
 const request = require('request');
-const path = require('path');
 
 exports.all = function (req,res) {
     Urls.all(function(err, docs) {
@@ -14,11 +13,8 @@ exports.all = function (req,res) {
             console.log(err);
             return res.sendStatus(500);
         }
-        console.log('main route')
         res.send(docs);
     });
-    //--------------------------------------------------------------------
-    //res.sendFile(path.resolve(__dirname + './../build', './index.html'));
 };
 
 function checkShortID (shortEntry) {
@@ -55,7 +51,7 @@ exports.findByShortId = function (req, res) {
     checkShortID (req.params.id).then(
         response => {
             if( response ) {
-                let countcall = ++( response.countcall) || 0;
+                let countcall = ++(response.countcall) || 0;
                 let redirectUrl = response.longurl;
                 if(response) {
                     updateCount(countcall, response._id).then(
@@ -117,8 +113,7 @@ function writeToDB(status, shortEntry, res, req) {
     if (status) {
         return res.status(500).send({status: 'This name is already in use! Choose a different name.'});
     } else {
-        //let url = UrlApi.parse(req.body.longurl);
-        let shorturl = config.serverHost + shortEntry;
+        const shorturl = config.serverHost + shortEntry;
 
         const urlData = {
             longurl: req.body.longurl,
