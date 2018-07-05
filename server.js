@@ -40,7 +40,7 @@ db.connect( config.databaseHost, function (err) {
     }
 
     app.listen(process.env.PORT || config.port, function() {
-        console.log('API app started. Port :', port);
+        console.log('API app started. Port :', config.port);
         console.log(Date());
     });
 });
